@@ -147,13 +147,17 @@ function selectBook(book) {
 
     $(".trace-area .art").hide()
     var instructions = ""
+    $("#editor").removeClass("mode-trace").removeClass("mode-color").removeClass("mode-fanart")
     if (book == "trace-pokemon") {
         $(".trace-area .art").show()
         instructions = 'Trace <span class="name">the pokemon</span>'
+        $("#editor").addClass("mode-trace")
     } else if (book == "fanart-pokemon") {
         instructions = 'Draw a picture of <span class="name">the pokemon</span>'
+        $("#editor").addClass("mode-fanart")
     } else if (book == "color-pokemon") {
         instructions = 'Color <span class="name">the pokemon</span>'
+        $("#editor").addClass("mode-color")
     }
     $(".instructions").html(instructions)
 

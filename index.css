@@ -30,6 +30,7 @@ body {
 .tabs {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 .tab-selector {
     border: 1px solid #ddd;
@@ -80,6 +81,7 @@ footer {
 #books > div {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 #books > div > * {
@@ -102,8 +104,8 @@ footer {
 }
 
 #books img {
-    max-height: 387px;
-    max-width: 387px;
+    max-height: min(387px, 30vw, 30vh);
+    max-width: min(387px, 30vw, 30vh);
 }
 
 #current-book {
@@ -215,8 +217,8 @@ footer {
     height: 64px;
     width: 64px;
     box-sizing: border-box;
-    flex: 1 1;
-    margin: 0 32px;
+    flex: 0 1;
+    margin: 0 auto;
     padding: 5px;
 }
 .tool:hover:not(.tool-selected) {
@@ -240,3 +242,23 @@ footer {
     box-shadow: none;
   }
 }
+
+@media only screen and (max-width:800px) {
+    .mode-trace .reference {
+        display: none;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    body {
+        padding: 0;
+    }
+    .tab-selector {
+        padding: 0.4rem 0.5rem;
+        margin-left: 0;
+    }
+    footer {
+
+    }
+}
+
