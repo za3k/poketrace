@@ -31,7 +31,7 @@ body {
     display: flex;
     flex-direction: row;
 }
-.tabs > .tab-selector {
+.tab-selector {
     border: 1px solid #ddd;
     border-bottom: 0;
     display: block;
@@ -40,6 +40,7 @@ body {
     user-select: none;
     position: relative;
     background: #eee;
+    transition: opacity 0.3s ease;
 }
 .tab-selector.selected {
     background: white;
@@ -47,6 +48,9 @@ body {
 .tab-selector.disabled {
     background: #ccc;
     color: #999;
+}
+.tab-selector.unlocked {
+    animation: highlight 1s ease-out;
 }
 .tab-selector:not(.selected):not(.disabled):hover {
     background: #e9e9e9;
@@ -66,6 +70,35 @@ footer {
     background: white;
     padding: 1rem;
     border-top: 1px lightgrey;
+}
+
+#books > div {
+    display: flex;
+    flex-direction: row;
+}
+
+#books > div > * {
+    text-align: center;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    font-size: 24px;
+}
+
+#books > div > .selected {
+    border: 1px solid black;
+}
+
+/* *:hover doesn't work in quirks mode */
+#books > div > *:hover {
+    border: 1px solid #999 !important;
+    background-color: #eee;
+}
+
+#books img {
+    max-height: 387px;
+    max-width: 387px;
 }
 
 #editor > div {
@@ -95,6 +128,7 @@ footer {
 #editor .trace-area .art {
     opacity: 15%;
 }
+
 
 
 .hflex {
@@ -127,3 +161,15 @@ footer {
     padding: 2px;
 }
 
+@keyframes highlight {
+    0% {
+    background-color: #ffd700; /* gold highlight */
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+  }
+  100% {
+    background-color: transparent;
+    transform: scale(1);
+    box-shadow: none;
+  }
+}

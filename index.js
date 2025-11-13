@@ -21,7 +21,8 @@ function load(id) {
     return localStorage.getItem(key(id))
 }
 
-const lineThickness = 2
+var lineThickness = 2
+var currentBook = null
 var currentPoke = null
 function selectPokemon(id) {
     if (currentPoke == id) return
@@ -29,7 +30,7 @@ function selectPokemon(id) {
     // TODO: Select in "Pokemon menu"
     // Save any current data
     if (currentPoke) save(id, easel.getData())
-    // TODO: Clear the easel
+    // Don't bother clearing the easel, even if deselecting. Just disable the tab.
 
     if (id) {
         // Load any stored drawing to edit
@@ -58,7 +59,11 @@ function getArtwork(pokemon) {
     return Object.values(art)[0] // Return a random one
 }
 
-function loadArtwork(href) {
+function selectBook(book) {
+    currentBook = book
+    $(`.book-link`).removeClass("selected")
+    $(`.book-link[data-book=${book}]`).addClass("selected")
+    enableTab("current-book")
 }
 
 function selectTab(tab) {
@@ -72,17 +77,17 @@ function disableTab(tab) {
 }
 
 function enableTab(tab) {
-    $(`.tab-selector[data-target=${tab}]`).removeClass("disabled")
+    $(`.tab-selector[data-target=${tab}]`).removeClass("disabled").addClass("unlocked")
 }
 
 // Tab selection in JS (rather than CSS)
 $(".main").on("click", ".tab-selector:not(.disabled)", function() {
     const target = $(this).data("target")
     selectTab(target)
+}).on("click", ".book-link", function() {
+    selectBook($(this).data("book"))
 })
 
-//selectProject()
-enableTab("current-book")
-enableTab("editor")
-selectPokemon('bulbasaur')
+selectBook("trace-pokemon")
+//selectPokemon('bulbasaur')
 

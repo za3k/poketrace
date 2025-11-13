@@ -1,0 +1,2 @@
+- Pikachu fanart image from pinterest (@madeva666)
+- Pikachu coloring image from coloringpages4u.com
