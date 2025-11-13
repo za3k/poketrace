@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Pokétrace</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="data/pokedex.json" defer></script>
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="main">
+    <div class="tabs">
+        <div class="tab-selector selected" data-target="account">Account</div>
+        <div class="tab-selector" data-target="books">Projects</div>
+        <div class="tab-selector disabled" data-target="current-book">Pokemon</div>
+        <div class="tab-selector disabled" data-target="editor">Editor</div>
+    </div>
+    <div class="tab selected" id="account">
+        Warning! Art is only saved on your browser. You might want to save it to a file regularly in case of any bugs (or to share with other people).
+
+        <div><input type="submit" value="Save Art to File"></div>
+        <div><input type="file"></input><input type="submit" value="Load Art from File"></div>
+        <div><input type="submit" value="Export as HTML"></div>
+    </div>
+    <div class="tab" id="books">
+        <div class="book-link" data-book="trace-pokemon">
+            <img href="trace-icon.jpg">
+            <span>Trace Pokemon</span>
+        </div>
+        <div class="book-link" data-book="fanart-pokemon">
+            <img href="fanart-icon.jpg">
+            <span>Pokemon Fanart</span>
+        </div>
+        <div class="book-link" data-book="fanart-pokemon">
+            <img href="color-icon.jpg">
+            <span>Color Pokemon (Not yet available)</span>
+        </div>
+    </div>
+    <div class="tab" id="current-book">
+        <div class="pokemon-link template">
+        </div>
+    </div>
+    <div class="tab" id="editor">
+        <div class="reference">
+            <img class="art" href="">
+            <h3 class="name"></h3>
+        </div>
+        <div class="trace-area">
+            <img class="art" href="">
+            <canvas class="edit-area"></canvas>
+        </div>
+            
+    </div>
+    <footer><b>Pokétrace</b> was made by <a href="https://za3k.com">za3k</a> as part of <a href="https://za3k.com/hackaday">hack-a-day</a>. The source code is <a href="https://github.com/za3k/hack-poketrace">on github</a>. Pokémon images & names © 1995-2025 Nintendo/Game Freak.
+    </div>
+</footer>
+</body>
+</html>
