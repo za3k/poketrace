@@ -20,7 +20,6 @@ function load(id) {
 }
 
 function selectPokemon(id) {
-    console.log(id)
     if (currentPoke == id) return
     const pokemon = pokedex[id]
 
@@ -53,7 +52,7 @@ function selectPokemon(id) {
             enableTab("current-book")
             selectTab("current-book") // Switch to select a new pokemon
         })
-        // TODO: There's a bug where if you don't click "Done" and select another pokemon, the new one also tets the second art. To work around it, we just force you to hit "Done" to continue. It's hack-a-day!
+        // There's a bug where if you don't click "Done" and select another pokemon, the new one also tets the second art. To work around it, we just force you to hit "Done" to continue. It's hack-a-day!
         selectTab("editor")
         disableTab("current-book")
     }

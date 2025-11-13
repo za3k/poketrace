@@ -20,9 +20,14 @@ class Easel {
             this.clear()
         })
         this.tools.on("click", (ev) => {
+            if ($(ev.target).hasClass("instant")) {
+                if ($(ev.target).hasClass("undo")) this.undo()
+                return
+            }
             this.toggleTool($(ev.target))
         })
         this.tool = "pencil"
+        this.saveStack = []
     }
     mouse(ev) {
         const rect = this.canvas.getBoundingClientRect()
@@ -62,6 +67,12 @@ class Easel {
         const c = this.canvas.getContext("2d")
         c.clearRect(0, 0, this.canvas.width, this.canvas.height)
         this.dirty = false
+        this.saveStack = []
+    }
+    replaceArt(dataUrl) {
+        const c = this.canvas.getContext("2d")
+        c.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.loadArt(dataUrl)
     }
     loadArt(dataUrl) {
         const c = this.canvas.getContext("2d")
@@ -86,6 +97,7 @@ class Easel {
         scroll() // Why doesn't it scroll to include the buttons after, on chrome's test mobile?
         // Allow drawing
         const engage = ev => {
+            this.savepoint()
             let mouse = this.mouse(ev)
             this.line(mouse,mouse)
             const move = ev => {
@@ -125,6 +137,14 @@ class Easel {
         this.jcanvas.off("mousedown")
         $(document).off("mouseup")
         this.jcanvas.off("mousemove")
+    }
+    undo() {
+        if (this.saveStack.length == 0) return
+        const data = this.saveStack.pop()
+        this.replaceArt(data)
+    }
+    savepoint() {
+        this.saveStack.push(this.getData())
     }
     draw(thicknessMultiplier, oldArt) {
         this.thicknessMultiplier = thicknessMultiplier || 1
