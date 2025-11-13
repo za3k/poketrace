@@ -73,6 +73,11 @@ footer {
     flex-direction: row;
 }
 
+#editor > div > * {
+    margin: auto;
+    text-align: center;
+}
+
 #editor .square {
     width: 400;
     height: 400;
