@@ -142,9 +142,18 @@ class Easel {
             })
         })
     }
+
+    isEmpty() {
+        const ctx = this.canvas.getContext('2d')
+        const pixelData = ctx.getImageData(0, 0, this.canvas.width, this.canvas.height).data
+        for (let i = 3; i < pixelData.length; i += 4) {
+            if (pixelData[i] !== 0) return false
+        }
+        return true
+    }
+
     getData() {
         return this.canvas.toDataURL()
-
     }
     makeImage(data) {
         return new Promise(resolve => {

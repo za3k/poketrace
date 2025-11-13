@@ -23,19 +23,21 @@
     <div class="tab selected" id="account">
         Warning! Art is only saved on your browser. You might want to save it to a file regularly in case of any bugs (or to share with other people).
 
-        <div><input type="submit" value="Save Art to File"></div>
-        <div><input type="file"></input><input type="submit" value="Load Art from File"></div>
-        <div><input type="submit" value="Export as HTML"></div>
+        <div>
+            <div><input type="submit" value="Save Art to File"></div>
+            <div><input type="file"></input><input type="submit" value="Load Art from File"></div>
+            <div><input type="submit" value="Export as HTML"></div>
+        </div>
     </div>
     <div class="tab" id="books">
         <div>
-            <div class="book-link selected" data-book="trace-pokemon">
+            <div class="book-link" data-book="trace-pokemon">
                 <img src="mode-trace.png">
                 <span>Trace Pokemon</span>
             </div>
             <div class="book-link" data-book="fanart-pokemon">
                 <img src="mode-fanart.jpg">
-                <span>Pokemon Fanart (Not yet available)</span>
+                <span>Draw Fanart</span>
             </div>
             <!--
             <div class="book-link" data-book="color-pokemon">
@@ -46,8 +48,7 @@
         </div>
     </div>
     <div class="tab" id="current-book">
-        <div class="pokemon-link template">
-        </div>
+        <div class="pokemon-container"></div>
     </div>
     <div class="tab" id="editor">
         <div>
@@ -60,7 +61,7 @@
                     <img class="art" href="">
                     <canvas height="400" width="400"></canvas>
                 </div>
-                <div>Trace <span class="name">pokemon</span></div>
+                <div class="instructions">Trace <span class="name">pokemon</span></div>
                 <div class="hflex">
                     <input type="submit" class="btn btn-danger clear" value="Delete">
                     <div></div>
