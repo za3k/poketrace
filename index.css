@@ -72,6 +72,11 @@ footer {
     border-top: 1px lightgrey;
 }
 
+#account .warning {
+    display: block;
+    margin-bottom: 1rem;
+}
+
 #books > div {
     display: flex;
     flex-direction: row;

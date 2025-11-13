@@ -59,6 +59,76 @@ function selectPokemon(id) {
     currentPoke = id
 }
 
+function exportHTML() {
+    const div = $("<div></div>")
+    var count = 0
+    for (const id of collection[1]) { // Base 151 only
+        const disp = getDisplay(id)
+        const pokemon = pokedex[id]
+        if (!disp.startsWith("data:")) continue // We only want to show hand-drawn ones
+        const e = $(`
+            <div class="pokemon" data-id="${id}">
+                <img src="${disp}">
+                <span>${pokemon.number}: ${pokemon.name}</span>
+            </div>
+        `)
+        div.append(e)
+        count += 1
+    }
+    if (count == 0) {
+        alert("To export, first draw some pokemon.")
+        return
+    }
+
+    const html = `
+        <!DOCTYPE html>
+        <html>
+            <head>
+                <meta charset="utf-8">
+                <style>
+                body {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, 150px);
+                    gap: 4px;
+                    justify-content: center;
+                }
+
+                body > div {
+                    aspect-ratio: 1;
+                    display: flex;
+                    flex-direction: column;
+                    border: 1px solid lightgrey;
+                    padding: 4px;
+                    position: relative;
+                    font-size: 10pt;
+                }
+
+                img {
+                    max-width: 100%;
+                    max-height: 100%;
+                    min-height: 0;
+                    flex: 1 1;
+                    object-fit: contain;
+                }
+
+                span {
+                    display: block;
+                    text-align: center;
+                    overflow: hidden;
+                    flex-shrink: 0;
+                    white-space: nowrap;
+                    font-size: 12px;
+                    text-overflow: ellipsis;
+                    margin-top: 4px
+                }
+                </style>
+            </head>
+            <body>${div[0].innerHTML}</body>
+        </html>`
+    var newWindow = window.open()
+    newWindow.document.write(html)
+}
+
 function getArtwork(pokemon) {
     const art = pokemon.art
     const preference = ["Sugimori artwork", "Global Link artwork"]
@@ -137,7 +207,7 @@ $(".main").on("click", ".tab-selector:not(.disabled)", function() {
     selectBook($(this).data("book"))
 }).on("click", ".pokemon-link", function() {
     selectPokemon($(this).data("id"))
-})
+}).on("click", ".export", exportHTML)
 
 async function main() {
     const data = await (await fetch("data/pokedex.json")).json()
