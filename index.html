@@ -3,9 +3,13 @@
     <meta charset="utf-8">
     <title>Pokétrace</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="easel.js"></script>
     <script src="data/pokedex.json" defer></script>
     <script src="index.js" defer></script>
     <link rel="stylesheet" href="index.css">
+
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="bootstrap.bundle.min.js"></script>
 </head>
 <body>
     <div class="main">
@@ -41,15 +45,28 @@
         </div>
     </div>
     <div class="tab" id="editor">
-        <div class="reference">
-            <img class="art" href="">
-            <h3 class="name"></h3>
+        <div>
+            <div class="reference">
+                <img class="art square" href="">
+                <h3 class="name"></h3>
+            </div>
+            <div class="easel trace-area">
+                <div class="square">
+                    <img class="art" href="">
+                    <canvas height="400" width="400"></canvas>
+                </div>
+                <div>Trace <span class="name">pokemon</span></div>
+                <div class="hflex">
+                    <input type="submit" class="btn btn-danger clear" value="Delete">
+                    <div></div>
+                    <img class="pencil tool tool-selected" data-tool="pencil" src="pencil.svg" />
+                    <img class="eraser tool" data-tool="eraser" src="eraser.svg" />
+                    <img class="undo" data-tool="undo" src="undo.svg" />
+                    <div></div>
+                    <input type="submit" class="btn btn-primary done" value="Done">
+                </div>
+            </div>
         </div>
-        <div class="trace-area">
-            <img class="art" href="">
-            <canvas class="edit-area"></canvas>
-        </div>
-            
     </div>
     <footer><b>Pokétrace</b> was made by <a href="https://za3k.com">za3k</a> as part of <a href="https://za3k.com/hackaday">hack-a-day</a>. The source code is <a href="https://github.com/za3k/hack-poketrace">on github</a>. Pokémon images & names © 1995-2025 Nintendo/Game Freak.
     </div>

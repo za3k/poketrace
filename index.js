@@ -7,17 +7,46 @@ for (entry of data) {
     }
 }
 
+const easel = new Easel($(".easel"))
+
+function key(id) {
+    return `poketrace-${id}`
+}
+
+function save(id, dataUrl) {
+    localStorage.setItem(key(id), dataUrl)
+}
+
+function load(id) {
+    return localStorage.getItem(key(id))
+}
+
+const lineThickness = 2
+var currentPoke = null
 function selectPokemon(id) {
-    // TODO: Exit early if that's the already-selected pokemon
+    if (currentPoke == id) return
     const pokemon = pokedex[id]
     // TODO: Select in "Pokemon menu"
-    // TODO: Save and unload any current data
-    // TODO: Load any stored drawings
-    // Display the pokemon in the editor
-    const artwork = `data/${getArtwork(pokemon)}`
-    $(".art").attr("src", artwork)
-    $(".name").text(pokemon.name)
-    $(".number").text(pokemon.number)
+    // Save any current data
+    if (currentPoke) save(id, easel.getData())
+    // TODO: Clear the easel
+
+    if (id) {
+        // Load any stored drawing to edit
+        const oldArt = load(id)
+
+        // Display the pokemon in the editor
+        const artwork = `data/${getArtwork(pokemon)}`
+        $(".art").attr("src", artwork)
+        $(".name").text(pokemon.name)
+        $(".number").text(pokemon.number)
+        easel.draw(lineThickness, oldArt).then(url => {
+            save(id, url)
+            disableTab("editor")
+            selectTab("current-book") // Switch to select a new pokemon
+        })
+    }
+    currentPoke = id
 }
 
 function getArtwork(pokemon) {
@@ -32,15 +61,28 @@ function getArtwork(pokemon) {
 function loadArtwork(href) {
 }
 
+function selectTab(tab) {
+    $(".tab-selector, .tab").removeClass("selected")
+    $(`.tab-selector[data-target=${tab}]`).addClass("selected")
+    $(`#${tab}.tab`).addClass("selected")
+}
+
+function disableTab(tab) {
+    $(`.tab-selector[data-target=${tab}]`).addClass("disabled")
+}
+
+function enableTab(tab) {
+    $(`.tab-selector[data-target=${tab}]`).removeClass("disabled")
+}
+
 // Tab selection in JS (rather than CSS)
 $(".main").on("click", ".tab-selector:not(.disabled)", function() {
     const target = $(this).data("target")
-    $(".tab-selector, .tab").removeClass("selected")
-    $(this).addClass("selected")
-    $(`#${target}.tab`).addClass("selected")
+    selectTab(target)
 })
 
-$(".tab-selector").removeClass("disabled")
 //selectProject()
+enableTab("current-book")
+enableTab("editor")
 selectPokemon('bulbasaur')
 

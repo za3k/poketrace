@@ -67,3 +67,58 @@ footer {
     padding: 1rem;
     border-top: 1px lightgrey;
 }
+
+#editor > div {
+    display: flex;
+    flex-direction: row;
+}
+
+#editor .square {
+    width: 400;
+    height: 400;
+    position: relative;
+}
+
+#editor .square > * {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#editor .trace-area .art {
+    opacity: 15%;
+}
+
+
+.hflex {
+    display: flex;
+    flex-direction: row;
+}
+
+.easel {
+    display: block;
+    padding: 20px;
+    width: min-content;
+    left: 0px;
+    border: 1px dashed darkgreen;
+}
+
+.tool, .undo {
+    height: 64px;
+    width: 64px;
+    box-sizing: border-box;
+    flex: 1 1;
+    margin: 0 32px;
+    padding: 5px;
+}
+.undo:hover, .tool:hover:not(.tool-selected) {
+    background: rgba(0, 0, 255, 0.1);
+}
+
+.tool-selected {
+    border: 2px red solid;
+    padding: 2px;
+}
+
