@@ -188,10 +188,16 @@ footer {
     position: relative;
 }
 
+#editor .square > .art {
+    left: 5%;
+    top: 5%;
+    width: 90%;
+    height: 90%;
+}
 #editor .square > * {
     position: absolute;
     left: 0;
-    right: 0;
+    top: 0;
     width: 100%;
     height: 100%;
 }
@@ -210,6 +216,9 @@ footer {
     padding: 20px;
     width: min-content;
     left: 0px;
+}
+
+.easel canvas {
     border: 1px dashed darkgreen;
 }
 
