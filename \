@@ -1,5 +1,5 @@
 // This is mostly taken from doodle-rpg.com
-// Added: undo tool, line thickness slider
+// Added: undo tool
 // Removed: clear button
 
 class Easel {
@@ -11,7 +11,6 @@ class Easel {
         this.cancel = div.find(".cancel")
         this.clearBtn = div.find(".clear")
         this.lineThickness = div.find(".line-thickness input")
-        this.lineThicknessLabel = div.find(".line-thickness .size")
         this.tools = div.find(".tool")
         this.enabled = false
         this.canvas.height = 400
@@ -28,20 +27,13 @@ class Easel {
             }
             this.toggleTool($(ev.target))
         })
-        this.lineThickness.on("input", () => {
-            this.lineThicknessLabel.text(this.lineThickness.val())
-        })
+        this.lineInput
         this.tool = "pencil"
         this.saveStack = []
     }
     mouse(ev) {
         const rect = this.canvas.getBoundingClientRect()
         return { x: (ev.clientX - rect.left)/rect.width*this.canvas.width, y: (ev.clientY - rect.top)/rect.height*this.canvas.height }
-    }
-    thickness() {
-        return [
-            0.4, 0.6, 0.8, 1, 1.5, 2, 3
-        ][this.lineThickness.val()-1]
     }
     line(mouse1, mouse2) {
         // assumes mouse (pixel) and canvas coordinates are the same, which they are here.
@@ -62,7 +54,7 @@ class Easel {
             }
         }[this.tool]
         for (let [k, v] of Object.entries(tool)) c[k] = v
-        c.lineWidth *= this.thicknessMultiplier * this.thickness()
+        c.lineWidth *= this.thicknessMultiplier
         c.beginPath()
         c.moveTo(mouse1.x, mouse1.y)
         c.lineTo(mouse2.x, mouse2.y)

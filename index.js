@@ -1,4 +1,3 @@
-var lineThickness = 2
 var currentBook = null
 var currentPoke = null
 const collection = {} // Generations
@@ -46,7 +45,7 @@ function selectPokemon(id) {
         $(".art").attr("src", artwork)
         $(".name").text(pokemon.name)
         $(".number").text(pokemon.number)
-        easel.draw(lineThickness, oldArt).then(url => {
+        easel.draw(undefined, oldArt).then(url => {
             if (!easel.isEmpty()) save(id, url)
             disableTab("editor")
             enableTab("current-book")
